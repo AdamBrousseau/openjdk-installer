@@ -64,9 +64,10 @@ do tar -xf "$f";
   directory=$(ls -d jdk*)
   file=${f%%.tar.gz*}
 
+set -x
   echo running "./packagesbuild.sh ${SIGN_CMD} ${SIGN_CERT} --major_version ${MAJOR_VERSION} --full_version ${FULL_VERSION} --input_directory ${directory} --output_directory ${file}.pkg --jvm ${JVM} --type ${TYPE}"
   ./packagesbuild.sh ${SIGN_CMD} ${SIGN_CERT} --major_version ${MAJOR_VERSION} --full_version ${FULL_VERSION} --input_directory ${directory} --output_directory ${file}.pkg --jvm ${JVM} --type ${TYPE}
-
+set +x
   rm -rf ${directory}
   rm -rf ${f}
 done
