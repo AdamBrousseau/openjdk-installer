@@ -323,7 +323,7 @@ FOR %%A IN (%ARCH%) DO (
 	        ECHO try !timestampErrors! / sha256 / timestamp server : %%s
 		REM Always hide password here
 		@ECHO OFF
-                "%ProgramFiles(x86)%\Windows Kits\%WIN_SDK_MAJOR_VERSION%\bin\%WIN_SDK_FULL_VERSION%\x64\signtool.exe" sign -f "%SIGNING_CERTIFICATE%" -p "%SIGN_PASSWORD%" -fd sha256 -d "AdoptOpenJDK" -t %%s "ReleaseDir\!OUTPUT_BASE_FILENAME!.msi"
+                ucl sign-code --file "ReleaseDir\!OUTPUT_BASE_FILENAME!.msi" -n WindowsSHA -t %%s --hash SHA256
 		@ECHO ON
 		IF NOT "%DEBUG%" == "true" @ECHO OFF
 
